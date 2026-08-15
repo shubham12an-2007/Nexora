@@ -1,0 +1,3 @@
+import { Link } from "react-router-dom";
+import { Button } from "../components/ui";
+export default function NotFound(){return <div className="grid min-h-screen place-items-center p-6 text-center"><div><p className="text-7xl font-bold tracking-tighter">404</p><h1 className="mt-3 text-xl font-semibold">This page doesn't exist.</h1><p className="mt-2 text-sm text-zinc-500">The link may be outdated or the page moved.</p><Link to="/dashboard" className="mt-6 inline-block"><Button>Back to dashboard</Button></Link></div></div>;}

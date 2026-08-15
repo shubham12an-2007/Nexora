@@ -1,0 +1,10 @@
+import { ArrowRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input } from "../components/ui";
+import { useAuth } from "../context/AuthContext";
+
+export default function Register() {
+  const nav = useNavigate(); const { login } = useAuth();
+  const submit = e => { e.preventDefault(); const fd = new FormData(e.currentTarget); login({name: fd.get("name"), email: fd.get("email")}); nav("/dashboard"); };
+  return <div className="grid min-h-screen lg:grid-cols-2"><div className="hidden bg-zinc-950 p-10 text-white lg:flex lg:flex-col"><Link to="/" className="flex items-center gap-2 text-sm font-bold"><span className="grid h-7 w-7 place-items-center rounded bg-white text-zinc-950">N</span>nexora</Link><div className="mt-auto"><p className="max-w-md text-3xl font-semibold tracking-tight">Build a job search you can actually understand.</p><div className="mt-6 space-y-3 text-xs text-zinc-400"><p>✓ Visual application pipeline</p><p>✓ Interview tracking</p><p>✓ Resume workspace</p><p>✓ Analytics and AI-ready architecture</p></div></div></div><div className="flex items-center justify-center p-6"><div className="w-full max-w-sm"><Link to="/" className="mb-12 inline-flex items-center gap-2 text-xs text-zinc-500 lg:hidden">← Back</Link><h1 className="text-2xl font-semibold tracking-tight">Create your workspace</h1><p className="mt-2 text-sm text-zinc-500">Start organizing your job search today.</p><form onSubmit={submit} className="mt-8 space-y-4"><Input name="name" label="Full name" placeholder="Shubham Kumar" required/><Input name="email" label="Email" type="email" placeholder="you@example.com" required/><Input name="password" label="Password" type="password" placeholder="••••••••" required/><Button type="submit" className="w-full">Create account <ArrowRight size={15}/></Button></form><p className="mt-6 text-center text-xs text-zinc-500">Already have an account? <Link to="/login" className="font-semibold text-zinc-900 dark:text-white">Sign in</Link></p></div></div></div>;
+}

@@ -1,0 +1,11 @@
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input } from "../components/ui";
+import { useAuth } from "../context/AuthContext";
+
+export default function Login() {
+  const nav = useNavigate(); const { login } = useAuth();
+  const submit = e => { e.preventDefault(); login(); nav("/dashboard"); };
+  return <AuthLayout title="Welcome back" subtitle="Sign in to continue to your workspace."><form onSubmit={submit} className="space-y-4"><Input label="Email" type="email" defaultValue="shubham@example.com" required/><Input label="Password" type="password" defaultValue="password" required/><div className="flex justify-end"><a className="text-xs font-medium text-zinc-500 hover:text-zinc-900">Forgot password?</a></div><Button type="submit" className="w-full">Sign in <ArrowRight size={15}/></Button></form><p className="mt-6 text-center text-xs text-zinc-500">Don't have an account? <Link to="/register" className="font-semibold text-zinc-900 dark:text-white">Create one</Link></p></AuthLayout>;
+}
+function AuthLayout({ title, subtitle, children }) { return <div className="grid min-h-screen lg:grid-cols-2"><div className="hidden bg-zinc-950 p-10 text-white lg:flex lg:flex-col"><Link to="/" className="flex items-center gap-2 text-sm font-bold"><span className="grid h-7 w-7 place-items-center rounded bg-white text-zinc-950">N</span>nexora</Link><div className="mt-auto max-w-md"><p className="text-3xl font-semibold tracking-tight">A calmer way to manage the job hunt.</p><p className="mt-4 text-sm leading-6 text-zinc-500">Track opportunities, interviews and progress without losing your focus.</p></div></div><div className="flex items-center justify-center p-6"><div className="w-full max-w-sm"><Link to="/" className="mb-12 inline-flex items-center gap-2 text-xs text-zinc-500 lg:hidden"><ArrowLeft size={14}/> Back to Nexora</Link><div><h1 className="text-2xl font-semibold tracking-tight">{title}</h1><p className="mt-2 text-sm text-zinc-500">{subtitle}</p><div className="mt-8">{children}</div></div></div></div></div>; }
