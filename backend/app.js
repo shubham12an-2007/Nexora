@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import router from "./src/routes/authRoutes.js";
 
 dotenv.config();
 
@@ -14,5 +15,7 @@ app.get("/", (req, res) => {
     message: "Nexora is running",
   });
 });
+
+app.use("/api/auth", router);
 
 export default app;
