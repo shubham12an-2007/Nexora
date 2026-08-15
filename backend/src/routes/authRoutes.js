@@ -1,6 +1,12 @@
 import express from "express";
 
-import { registerUser, loginUser } from "../controllers/authController.js";
+import {
+  registerUser,
+  loginUser,
+  getMe,
+} from "../controllers/authController.js";
+
+import authMiddleware from "../middleware/authMiddleware.js";
 
 import {
   registerValidation,
@@ -15,5 +21,8 @@ router.post("/register", registerValidation, validateRequest, registerUser);
 
 // LOGIN
 router.get("/login", loginValidation, validateRequest, loginUser);
+
+// getme
+router.get("/me", authMiddleware, getMe);
 
 export default router;
